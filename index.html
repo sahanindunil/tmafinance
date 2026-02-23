@@ -51,7 +51,7 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -65,7 +65,7 @@
         .progress-label {
             font-weight: 700;
             color: var(--tma-blue);
-            min-width: 180px;
+            min-width: 220px;
         }
 
         progress { 
@@ -87,7 +87,7 @@
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); 
             gap: 24px; 
         }
 
@@ -137,11 +137,11 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            margin-bottom: 15px; 
+            margin-bottom: 12px; 
         }
 
         .pillar { 
-            font-size: 0.7rem; 
+            font-size: 0.65rem; 
             background: #f0f0f0; 
             padding: 4px 10px; 
             border-radius: 20px; 
@@ -150,25 +150,32 @@
             text-transform: uppercase; 
         }
 
-        .case-title { font-weight: 800; font-size: 1.2rem; color: var(--tma-blue); }
-        .description { font-size: 0.95rem; color: var(--text-muted); margin: 10px 0 20px; line-height: 1.5; }
+        .case-title { font-weight: 800; font-size: 1.15rem; color: var(--tma-blue); }
+        .description { font-size: 0.95rem; color: var(--text-muted); margin: 8px 0 15px; line-height: 1.5; }
         
         .tools-tag {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
             gap: 6px;
-            font-size: 0.85rem; 
+            font-size: 0.8rem; 
             color: #444; 
             font-weight: 600;
             background: #fff;
             border: 1px solid #ddd;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 6px;
-            width: fit-content;
         }
 
         .checkbox-area { 
-            margin-top: 25px; 
+            margin-top: 20px; 
             padding-top: 15px; 
             border-top: 1px solid #eee; 
             display: flex; 
@@ -176,11 +183,11 @@
             gap: 12px; 
         }
 
-        .checkbox-area label { font-weight: 600; cursor: pointer; user-select: none; }
+        .checkbox-area label { font-weight: 700; cursor: pointer; user-select: none; font-size: 0.9rem; }
 
         input[type="checkbox"] { 
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             cursor: pointer; 
             accent-color: var(--success-green);
         }
@@ -189,7 +196,7 @@
         .stats-footer { 
             margin-top: 50px; 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
             gap: 20px; 
         }
 
@@ -219,14 +226,14 @@
 <div class="header">
     <div class="container">
         <h1>Mastering Copilot: TMA Finance Enablement</h1>
-        <p>Live Demo Success Tracker | Sahan Indunil - AI Solution Engineer</p>
+        <p>Strategic Demo Success Tracker | Sahan Indunil - AI Solution Engineer</p>
     </div>
 </div>
 
 <div class="progress-wrapper">
     <div class="container">
         <div class="progress-container">
-            <span class="progress-label" id="progress-text-label">Demo Progress: 0%</span>
+            <span class="progress-label" id="progress-text-label">Session Completion: 0%</span>
             <progress id="demo-progress" value="0" max="8"></progress>
         </div>
     </div>
@@ -240,40 +247,56 @@
             Segment 1: The AI-Powered Analyst (Financial Planning & Analysis)
         </div>
 
+        <!-- Demo 1 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">1. Data Architecture</span><span class="pillar">Analysis</span></div>
-            <p class="description">Automated data cleansing for Microsoft Dynamics 365 Business Central exports. Standardizing complex flight log datasets for accuracy.</p>
-            <div class="tools-tag"><i data-lucide="database" size="16"></i> Excel + Copilot Web</div>
+            <div class="demo-top"><span class="case-title">1. Data Architecture & Hygiene</span><span class="pillar">Analysis</span></div>
+            <p class="description">Automating cleanup for 2,000 rows of inconsistent flight billing data from Microsoft Dynamics 365 Business Central. Instant standardization of dates, resort names, and automated Tourism Goods and Services Tax (TGST) calculations.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="database" size="14"></i> Excel Copilot</div>
+                <div class="tool-item"><i data-lucide="table-properties" size="14"></i> Table Structuring</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo1" onchange="updateProgress()">
                 <label for="demo1">Mark Demo Complete</label>
             </div>
         </div>
 
+        <!-- Demo 2 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">2. Revenue Intelligence</span><span class="pillar">Planning</span></div>
-            <p class="description">Predictive forecasting for Noonu Atoll flight frequencies. Simulating revenue impacts based on luxury resort booking trends.</p>
-            <div class="tools-tag"><i data-lucide="trending-up" size="16"></i> Excel + Copilot Web</div>
+            <div class="demo-top"><span class="case-title">2. Predictive Revenue Intelligence</span><span class="pillar">Planning</span></div>
+            <p class="description">Transitioning to strategic growth forecasting for the Noonu Atoll route. Modeling "What-If" scenarios assuming a 5% flight frequency increase and a 2% fuel cost rise to determine Q3 trajectory.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="trending-up" size="14"></i> Excel Copilot</div>
+                <div class="tool-item"><i data-lucide="pie-chart" size="14"></i> Pivot Analysis</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo2" onchange="updateProgress()">
                 <label for="demo2">Mark Demo Complete</label>
             </div>
         </div>
 
+        <!-- Demo 3 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">3. Automated Commentary</span><span class="pillar">Analysis</span></div>
-            <p class="description">Instant generation of Monthly Management summaries. Translating budget variance data into executive-ready narratives.</p>
-            <div class="tools-tag"><i data-lucide="file-text" size="16"></i> Word + Word Copilot</div>
+            <div class="demo-top"><span class="case-title">3. Automated Financial Commentary</span><span class="pillar">Reporting</span></div>
+            <p class="description">Translating complex Excel data and forecasts into a structured executive narrative for the Chief Financial Officer. Incorporating 2026 tourism trends to support seaplane fleet expansion plans.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="file-text" size="14"></i> Word Copilot</div>
+                <div class="tool-item"><i data-lucide="languages" size="14"></i> Tone Adjustment</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo3" onchange="updateProgress()">
                 <label for="demo3">Mark Demo Complete</label>
             </div>
         </div>
 
+        <!-- Demo 4 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">4. The Dispute Desk</span><span class="pillar">Planning</span></div>
-            <p class="description">Summarizing multi-threaded resort billing disputes. Consolidating email history for faster credit note approvals and resolution.</p>
-            <div class="tools-tag"><i data-lucide="mail" size="16"></i> Outlook + Copilot Chat</div>
+            <div class="demo-top"><span class="case-title">4. The Dispute Desk</span><span class="pillar">Customer Relations</span></div>
+            <p class="description">Resolving the "Hilton Amingiri" billing thread. Summarizing 20+ emails to identify passenger discrepancies and cross-referencing manifests to instantly generate credit note settlement letters.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="mail" size="14"></i> Outlook Copilot</div>
+                <div class="tool-item"><i data-lucide="file-check" size="14"></i> Word Credit Notes</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo4" onchange="updateProgress()">
                 <label for="demo4">Mark Demo Complete</label>
@@ -286,40 +309,56 @@
             Segment 2: The Intelligent Controller (Risk, Compliance & Procurement)
         </div>
 
+        <!-- Demo 5 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">5. The Integrity Engine</span><span class="pillar">Procurement</span></div>
-            <p class="description">Revenue Recovery Management: Cross-referencing fuel vendor invoices against actual validated digital flight logs to prevent overbilling.</p>
-            <div class="tools-tag"><i data-lucide="check-square" size="16"></i> Excel + Outlook</div>
+            <div class="demo-top"><span class="case-title">5. The Integrity Engine</span><span class="pillar">Audit</span></div>
+            <p class="description">Reconciling external fuel vendor invoices against internal aircraft flight logs. Automatically detecting overbilling (e.g., 1,450 Liters vs 1,150 Liters) and quantifying the Revenue Recovery Value in USD.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="check-circle" size="14"></i> Excel Reconciler</div>
+                <div class="tool-item"><i data-lucide="send" size="14"></i> Automated Dispute Email</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo5" onchange="updateProgress()">
                 <label for="demo5">Mark Demo Complete</label>
             </div>
         </div>
 
+        <!-- Demo 6 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">6. Cognitive Knowledge Hub</span><span class="pillar">Risk</span></div>
-            <p class="description">Building a specialized Maldives Inland Revenue Authority (MIRA) Tax Advisor for instant guidance on local tax compliance and regulations.</p>
-            <div class="tools-tag"><i data-lucide="bot" size="16"></i> Copilot Studio + Edge</div>
+            <div class="demo-top"><span class="case-title">6. The Cognitive Knowledge Hub</span><span class="pillar">Compliance</span></div>
+            <p class="description">Building the "TMA Tax Insider" Agent. A specialized Digital Brain that reads 50-page Maldives Inland Revenue Authority circulars to provide instant, cited answers on Green Tax and Tourism Goods and Services Tax.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="bot" size="14"></i> Copilot Studio</div>
+                <div class="tool-item"><i data-lucide="book-open" size="14"></i> Knowledge Indexing</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo6" onchange="updateProgress()">
                 <label for="demo6">Mark Demo Complete</label>
             </div>
         </div>
 
+        <!-- Demo 7 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">7. Operational Intelligence</span><span class="pillar">Procurement</span></div>
-            <p class="description">Extracting fuel uplift volumes from scanned aircraft logbooks using Optical Character Recognition (OCR) and Vision-based Artificial Intelligence.</p>
-            <div class="tools-tag"><i data-lucide="scan-text" size="16"></i> Edge Sidebar / Vision AI</div>
+            <div class="demo-top"><span class="case-title">7. Strategic Spend Intelligence</span><span class="pillar">Procurement</span></div>
+            <p class="description">Benchmarking fuel suppliers (Alpha vs. Beta) against global market intelligence. Leveraging real-time regional data to negotiate a $0.05/liter price reduction and optimize category management.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="search" size="14"></i> Edge Sidebar</div>
+                <div class="tool-item"><i data-lucide="briefcase" size="14"></i> Negotiation Strategy</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo7" onchange="updateProgress()">
                 <label for="demo7">Mark Demo Complete</label>
             </div>
         </div>
 
+        <!-- Demo 8 -->
         <div class="demo-card">
-            <div class="demo-top"><span class="case-title">8. Variance Alerting</span><span class="pillar">Risk</span></div>
-            <p class="description">Automated alerting for operational discrepancies. Notifying stakeholders in Microsoft Teams when catering costs exceed a $5,000 variance.</p>
-            <div class="tools-tag"><i data-lucide="bell" size="16"></i> Power Automate + Excel</div>
+            <div class="demo-top"><span class="case-title">8. The Digital Guardrail</span><span class="pillar">Governance</span></div>
+            <p class="description">Constructing a No-Code automated gatekeeper. Using natural language to build a workflow that blocks fuel invoices with unit prices above $1.15, alerting the Financial Controller instantly on Teams.</p>
+            <div class="tools-tag">
+                <div class="tool-item"><i data-lucide="zap" size="14"></i> Power Automate</div>
+                <div class="tool-item"><i data-lucide="bell" size="14"></i> Teams Notifications</div>
+            </div>
             <div class="checkbox-area">
                 <input type="checkbox" id="demo8" onchange="updateProgress()">
                 <label for="demo8">Mark Demo Complete</label>
@@ -334,15 +373,15 @@
         </div>
         <div class="stat-box">
             <span class="stat-val">75%</span>
-            <span class="stat-label">Regulatory Compliance Reporting Efficiency</span>
+            <span class="stat-label">Reduction in Manual Data Hygiene Tasks</span>
         </div>
         <div class="stat-box">
-            <span class="stat-val">50%</span>
-            <span class="stat-label">Faster Commercial Contract Review Cycles</span>
+            <span class="stat-val">Zero Hallucinations</span>
+            <span class="stat-label">Cited Maldives Inland Revenue Authority Answers</span>
         </div>
         <div class="stat-box">
             <span class="stat-val">Reduce Collection Cycle</span>
-            <span class="stat-label">Days Sales Outstanding (DSO) Reduction</span>
+            <span class="stat-label">Target: Days Sales Outstanding (DSO)</span>
         </div>
     </div>
 </div>
@@ -362,7 +401,7 @@
         // Update progress bar
         progress.value = checkedCount;
         const percent = Math.round((checkedCount / total) * 100);
-        label.innerText = `Demo Progress: ${percent}%`;
+        label.innerText = `Session Completion: ${percent}%`;
 
         // Update card visuals
         checkboxes.forEach(cb => {
@@ -376,7 +415,7 @@
 
         // Success Celebration Effect
         if (percent === 100) {
-            label.innerText = "🚀 All Demos Successful!";
+            label.innerText = "🚀 All Strategic Demos Successful!";
             label.style.color = "var(--success-green)";
             document.querySelector('.progress-wrapper').classList.add('full-success');
         } else {
