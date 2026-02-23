@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMA Finance AI Success Dashboard</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { 
+            --tma-blue: #004a99; 
+            --tma-light: #eef4fb; 
+            --success-green: #28a745; 
+            --success-bg: #f0fff4;
+            --text-dark: #1a1a1a;
+            --text-muted: #666;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        body { 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            background-color: #f4f7fa; 
+            margin: 0; 
+            padding: 0; 
+            color: var(--text-dark); 
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header { 
+            background: linear-gradient(135deg, var(--tma-blue) 0%, #003366 100%); 
+            color: white; 
+            padding: 40px 20px; 
+            text-align: center; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .header h1 { margin: 0; font-size: 2.2rem; letter-spacing: -0.5px; }
+        .header p { opacity: 0.9; margin: 10px 0 0; font-weight: 300; }
+
+        /* Sticky Progress Container */
+        .progress-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .progress-label {
+            font-weight: 700;
+            color: var(--tma-blue);
+            min-width: 180px;
+        }
+
+        progress { 
+            flex-grow: 1;
+            height: 14px; 
+            border-radius: 10px; 
+            appearance: none;
+        }
+
+        progress::-webkit-progress-bar { background-color: #eee; border-radius: 10px; }
+        progress::-webkit-progress-value { 
+            background: linear-gradient(90deg, var(--tma-blue), var(--success-green)); 
+            border-radius: 10px; 
+            transition: width 0.4s ease;
+        }
+
+        /* Grid & Sections */
+        .main-content { padding: 30px 0 60px; }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+            gap: 24px; 
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .section-header { 
+            grid-column: 1 / -1; 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--tma-light); 
+            padding: 14px 24px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            color: var(--tma-blue); 
+            border-left: 6px solid var(--tma-blue); 
+            margin-top: 20px;
+        }
+
+        /* Demo Cards */
+        .demo-card { 
+            background: white; 
+            padding: 24px; 
+            border-radius: 12px; 
+            border: 1px solid #e0e0e0; 
+            display: flex; 
+            flex-direction: column; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-card:hover { 
+            transform: translateY(-4px);
+            border-color: var(--tma-blue); 
+            box-shadow: var(--card-shadow); 
+        }
+
+        .demo-card.completed {
+            background-color: var(--success-bg);
+            border-color: var(--success-green);
+        }
+
+        .demo-top { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 15px; 
+        }
+
+        .pillar { 
+            font-size: 0.7rem; 
+            background: #f0f0f0; 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            font-weight: 800; 
+            color: #555;
+            text-transform: uppercase; 
+        }
+
+        .case-title { font-weight: 800; font-size: 1.2rem; color: var(--tma-blue); }
+        .description { font-size: 0.95rem; color: var(--text-muted); margin: 10px 0 20px; line-height: 1.5; }
+        
+        .tools-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem; 
+            color: #444; 
+            font-weight: 600;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 5px 12px;
+            border-radius: 6px;
+            width: fit-content;
+        }
+
+        .checkbox-area { 
+            margin-top: 25px; 
+            padding-top: 15px; 
+            border-top: 1px solid #eee; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+
+        .checkbox-area label { font-weight: 600; cursor: pointer; user-select: none; }
+
+        input[type="checkbox"] { 
+            width: 20px;
+            height: 20px;
+            cursor: pointer; 
+            accent-color: var(--success-green);
+        }
+
+        /* Stats Footer */
+        .stats-footer { 
+            margin-top: 50px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px; 
+        }
+
+        .stat-box { 
+            background: white; 
+            padding: 25px; 
+            text-align: center; 
+            border-radius: 12px; 
+            border-top: 5px solid #d9534f; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .stat-val { font-size: 1.6rem; font-weight: 800; color: #d9534f; display: block; margin-bottom: 5px; }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+
+        /* Celebratory Pulse */
+        @keyframes success-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .full-success { animation: success-pulse 1s infinite; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="container">
+        <h1>Mastering Copilot: TMA Finance Enablement</h1>
+        <p>Live Demo Success Tracker | Sahan Indunil - AI Solution Engineer</p>
+    </div>
+</div>
+
+<div class="progress-wrapper">
+    <div class="container">
+        <div class="progress-container">
+            <span class="progress-label" id="progress-text-label">Demo Progress: 0%</span>
+            <progress id="demo-progress" value="0" max="8"></progress>
+        </div>
+    </div>
+</div>
+
+<div class="container main-content">
+    <div class="grid">
+        <!-- Segment 1 -->
+        <div class="section-header">
+            <i data-lucide="line-chart"></i>
+            Segment 1: The AI-Powered Analyst (Financial Planning & Analysis)
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">1. Data Architecture</span><span class="pillar">Analysis</span></div>
+            <p class="description">Automated data cleansing for Microsoft Dynamics 365 Business Central exports. Standardizing complex flight log datasets for accuracy.</p>
+            <div class="tools-tag"><i data-lucide="database" size="16"></i> Excel + Copilot Web</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo1" onchange="updateProgress()">
+                <label for="demo1">Mark Demo Complete</label>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">2. Revenue Intelligence</span><span class="pillar">Planning</span></div>
+            <p class="description">Predictive forecasting for Noonu Atoll flight frequencies. Simulating revenue impacts based on luxury resort booking trends.</p>
+            <div class="tools-tag"><i data-lucide="trending-up" size="16"></i> Excel + Copilot Web</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo2" onchange="updateProgress()">
+                <label for="demo2">Mark Demo Complete</label>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">3. Automated Commentary</span><span class="pillar">Analysis</span></div>
+            <p class="description">Instant generation of Monthly Management summaries. Translating budget variance data into executive-ready narratives.</p>
+            <div class="tools-tag"><i data-lucide="file-text" size="16"></i> Word + Word Copilot</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo3" onchange="updateProgress()">
+                <label for="demo3">Mark Demo Complete</label>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">4. The Dispute Desk</span><span class="pillar">Planning</span></div>
+            <p class="description">Summarizing multi-threaded resort billing disputes. Consolidating email history for faster credit note approvals and resolution.</p>
+            <div class="tools-tag"><i data-lucide="mail" size="16"></i> Outlook + Copilot Chat</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo4" onchange="updateProgress()">
+                <label for="demo4">Mark Demo Complete</label>
+            </div>
+        </div>
+
+        <!-- Segment 2 -->
+        <div class="section-header">
+            <i data-lucide="shield-check"></i>
+            Segment 2: The Intelligent Controller (Risk, Compliance & Procurement)
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">5. The Integrity Engine</span><span class="pillar">Procurement</span></div>
+            <p class="description">Revenue Recovery Management: Cross-referencing fuel vendor invoices against actual validated digital flight logs to prevent overbilling.</p>
+            <div class="tools-tag"><i data-lucide="check-square" size="16"></i> Excel + Outlook</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo5" onchange="updateProgress()">
+                <label for="demo5">Mark Demo Complete</label>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">6. Cognitive Knowledge Hub</span><span class="pillar">Risk</span></div>
+            <p class="description">Building a specialized Maldives Inland Revenue Authority (MIRA) Tax Advisor for instant guidance on local tax compliance and regulations.</p>
+            <div class="tools-tag"><i data-lucide="bot" size="16"></i> Copilot Studio + Edge</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo6" onchange="updateProgress()">
+                <label for="demo6">Mark Demo Complete</label>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">7. Operational Intelligence</span><span class="pillar">Procurement</span></div>
+            <p class="description">Extracting fuel uplift volumes from scanned aircraft logbooks using Optical Character Recognition (OCR) and Vision-based Artificial Intelligence.</p>
+            <div class="tools-tag"><i data-lucide="scan-text" size="16"></i> Edge Sidebar / Vision AI</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo7" onchange="updateProgress()">
+                <label for="demo7">Mark Demo Complete</label>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-top"><span class="case-title">8. Variance Alerting</span><span class="pillar">Risk</span></div>
+            <p class="description">Automated alerting for operational discrepancies. Notifying stakeholders in Microsoft Teams when catering costs exceed a $5,000 variance.</p>
+            <div class="tools-tag"><i data-lucide="bell" size="16"></i> Power Automate + Excel</div>
+            <div class="checkbox-area">
+                <input type="checkbox" id="demo8" onchange="updateProgress()">
+                <label for="demo8">Mark Demo Complete</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-footer">
+        <div class="stat-box">
+            <span class="stat-val">20 Mins</span>
+            <span class="stat-label">Time Saved per Account Reconciliation</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-val">75%</span>
+            <span class="stat-label">Regulatory Compliance Reporting Efficiency</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-val">50%</span>
+            <span class="stat-label">Faster Commercial Contract Review Cycles</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-val">Reduce Collection Cycle</span>
+            <span class="stat-label">Days Sales Outstanding (DSO) Reduction</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+        const total = checkboxes.length;
+        
+        const progress = document.getElementById('demo-progress');
+        const label = document.getElementById('progress-text-label');
+        
+        // Update progress bar
+        progress.value = checkedCount;
+        const percent = Math.round((checkedCount / total) * 100);
+        label.innerText = `Demo Progress: ${percent}%`;
+
+        // Update card visuals
+        checkboxes.forEach(cb => {
+            const card = cb.closest('.demo-card');
+            if (cb.checked) {
+                card.classList.add('completed');
+            } else {
+                card.classList.remove('completed');
+            }
+        });
+
+        // Success Celebration Effect
+        if (percent === 100) {
+            label.innerText = "🚀 All Demos Successful!";
+            label.style.color = "var(--success-green)";
+            document.querySelector('.progress-wrapper').classList.add('full-success');
+        } else {
+            label.style.color = "var(--tma-blue)";
+            document.querySelector('.progress-wrapper').classList.remove('full-success');
+        }
+    }
+</script>
+
+</body>
+</html>
